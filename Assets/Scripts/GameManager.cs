@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : Singleton<GameManager> {
-
-	private int passTime = 0;
-	private float gameTime;
+public partial class GameManager : Singleton<GameManager> {
+	TimeBarView gameTimeBar;
+	private float passTime = 0;
+	private float gameTimechange;
+	int timer_i;
 
 	protected override void Awake()
 	{
@@ -15,7 +16,7 @@ public class GameManager : Singleton<GameManager> {
 	private void Start() { }
 
 	private void Update() {
-		//TODO:reduce time
+		GameTimeHandle ();
 	}
 
 	public void GetDecide(bool _resullt) {
