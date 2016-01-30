@@ -3,8 +3,11 @@ using System.Collections;
 
 public partial class GameManager : Singleton<GameManager> {
 	TimeBarView gameTimeBar;
-	private float passTime = 0;
+	private float passRequestTime = 3;
 	private float gameTimechange;
+	
+
+
 	int timer_i;
 
 	protected override void Awake()
@@ -16,11 +19,30 @@ public partial class GameManager : Singleton<GameManager> {
 	private void Start() { }
 
 	private void Update() {
-		GameTimeHandle ();
+		GameTimeHandle();
 	}
 
-	public void GetDecide(bool _resullt) {
+	public void GetDecide(bool _isPass) {
 		//TODO:	pass/fail handle
+
+		if (_isPass)
+		{
+			passRequestTime--;
+
+			if (passRequestTime == 0)
+				Pass();
+		}
+		else {
+
+		}
+	}
+
+	private void Pass() {
+
+	}
+
+	private void GameOver() {
+
 	}
 
 	private void InitStage(int _index) {
