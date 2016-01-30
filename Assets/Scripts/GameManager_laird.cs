@@ -14,7 +14,6 @@ public partial class GameManager : Singleton<GameManager> {
 		if (remainTime <= 0) {
 			GameOver ();
 		}
-
 			
 	}
 
