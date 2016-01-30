@@ -86,6 +86,7 @@ public class Mob : MonoBehaviour {
 			break;
 		case Mob.Behavior.noise:
 			//TODO:	minus player's life
+			SetBehavior(Mob.Behavior.none);
 			GameManager.Instance.GetDecide(true);
 			break;
 		}
