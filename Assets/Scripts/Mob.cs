@@ -3,12 +3,6 @@ using System.Collections;
 
 public class Mob : MonoBehaviour {
 
-	public enum Behavior
-	{
-		none,
-		noise
-	};
-
 	public enum MoveDirection
 	{
 		right,
@@ -25,7 +19,7 @@ public class Mob : MonoBehaviour {
 	private float m_movable_distance_x = 0.0f; 
 	private float m_movable_distance_y = 0.0f; 
 
-	private Behavior m_behavior;
+	public Behavior m_behavior;
 
 	// Use this for initialization
 	void Start () {
@@ -77,16 +71,17 @@ public class Mob : MonoBehaviour {
 		ShakeBody ();
 	}
 	void ShakeBody() {
+		
 	}
 
 	public void OnMouseHit () {
 		
 		switch (GetBehavior()) {
-		case Mob.Behavior.none:
+		case Behavior.none:
 			break;
-		case Mob.Behavior.noise:
+		case Behavior.noise:
 			//TODO:	minus player's life
-			SetBehavior(Mob.Behavior.none);
+			MakeMobAsRegularMob();
 			GameManager.Instance.GetDecide(true);
 			break;
 		}
@@ -100,4 +95,14 @@ public class Mob : MonoBehaviour {
 		m_behavior = b;
 	}
 
+	private void MakeMobAsRegularMob() {
+		SetBehavior(Behavior.none);
+	}
+
+}
+
+public enum Behavior
+{
+	none,
+	noise
 }
