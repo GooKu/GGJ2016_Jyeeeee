@@ -34,7 +34,6 @@ public class Mob : MonoBehaviour {
 		m_move_speed_y = 0.0f;
 		m_movable_distance_x = 4.0f;
 		m_movable_distance_y = 0.0f;
-		m_behavior = Behavior.noise;
 		m_move_direction = MoveDirection.left;
 	}
 	
@@ -78,6 +77,7 @@ public class Mob : MonoBehaviour {
 		
 		switch (GetBehavior()) {
 		case Behavior.none:
+			GameManager.Instance.GetDecide(false);
 			break;
 		case Behavior.noise:
 			//TODO:	minus player's life

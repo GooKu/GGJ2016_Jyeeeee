@@ -2,6 +2,11 @@
 using System.Collections;
 
 public partial class GameManager : Singleton<GameManager> {
+	//gooku, setting at the object/-s
+	public GameObject PassObj;
+	public GameObject FailObj;
+	//gooku, setting at the object/-e
+
 	private int passRequestTime = 3;
 	private float punishTime = 1;
 
@@ -51,11 +56,18 @@ public partial class GameManager : Singleton<GameManager> {
 	}
 
 	private void Pass() {
+		if (PassObj == null)
+			return;
+
 		gamestatus = GameStatus.PASS;
-	}
+		PassObj.SetActive(true);
+    }
 
 	private void GameOver() {
+		if (FailObj == null)
+			return;
 		gamestatus = GameStatus.FAIL;
+		FailObj.SetActive(true);
     }
 
 	private void InitStage(int _index) {
