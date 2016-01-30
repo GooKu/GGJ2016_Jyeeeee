@@ -97,7 +97,8 @@ public class bg_scroll : MonoBehaviour
 			m_pos_x += m_scroll_speed_x;
 			// end of scroll.
 			if (m_pos_x < m_end_x) {
-				m_pos_x = scroll_unit;
+				//Debug.Log ("m_pos_x = " + m_pos_x);
+				m_pos_x += (scroll_unit * 3);
 
 				CleaeAllMobInst();
 
@@ -170,16 +171,16 @@ public class bg_scroll : MonoBehaviour
 #if SM_DEBUG_SCROLL_BG
 
 		if (GUI.Button (new Rect (xx, yy, ww, hh), "Speed Down")) {
-			GameManager.Instance.m_bg_scroll_speed += m_Debug_Scroll_Speed;
-			if (GameManager.Instance.m_bg_scroll_speed > 0.0f) {
-				GameManager.Instance.m_bg_scroll_speed = 0.0f;
+			GameManager.m_bg_scroll_speed -= m_Debug_Scroll_Speed;
+			if (GameManager.m_bg_scroll_speed > 0.0f) {
+				GameManager.m_bg_scroll_speed = 0.0f;
 			}
 		}
 		yy += hh;
 		if (GUI.Button (new Rect (xx, yy, ww, hh), "Speed Up")) {
-			GameManager.Instance.m_bg_scroll_speed -= m_Debug_Scroll_Speed;
-			if (GameManager.Instance.m_bg_scroll_speed <= -scroll_unit) {
-				GameManager.Instance.m_bg_scroll_speed = -scroll_unit;
+			GameManager.m_bg_scroll_speed += m_Debug_Scroll_Speed;
+			if (GameManager.m_bg_scroll_speed <= -scroll_unit) {
+				GameManager.m_bg_scroll_speed = -scroll_unit;
 			}
 		}
 		yy += hh;
