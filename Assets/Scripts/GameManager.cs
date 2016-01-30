@@ -48,12 +48,12 @@ public partial class GameManager : Singleton<GameManager> {
 	}
 
 	private void Pass() {
-
+		gamestatus = GameStatus.PASS;
 	}
 
 	private void GameOver() {
-
-	}
+		gamestatus = GameStatus.FAIL;
+    }
 
 	private void InitStage(int _index) {
 		remainTime = passTime;
