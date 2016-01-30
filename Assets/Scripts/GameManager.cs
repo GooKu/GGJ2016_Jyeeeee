@@ -14,6 +14,7 @@ public partial class GameManager : Singleton<GameManager> {
 	public GameObject[] StageArray;
 	//gooku, setting at the object/-e
 
+	private int currentStageIndex = 0;
 	private int passRequestCount = 3;
 	private float punishTime = 1;
 
@@ -46,7 +47,8 @@ public partial class GameManager : Singleton<GameManager> {
 
 	public void GameStart(){
 		StartMenu.SetActive(false);
-		InitStage(0);
+		currentStageIndex = 0;
+		InitStage(currentStageIndex);
 		m_bg_scrolling = true;
 		gamestatus = GameStatus.PROCESS;
 	}
@@ -109,6 +111,25 @@ public partial class GameManager : Singleton<GameManager> {
 			StageArray[i].SetActive(_index == i);
 		}
     }
+
+	public void NextStage()
+	{
+		currentStageIndex++;
+
+		if (currentStageIndex >= StageArray.Length)
+			currentStageIndex = 0;
+
+		InitStage(currentStageIndex);
+		gamestatus = GameStatus.PROCESS;
+
+		resultView.Init();
+	}
+
+	public void Restart() {
+		InitStage(currentStageIndex);
+		gamestatus = GameStatus.PROCESS;
+		resultView.Init();
+	}
 
 }
 

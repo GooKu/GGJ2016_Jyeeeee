@@ -24,7 +24,7 @@ public class TimeBarView : MonoBehaviour {
     }
 
 	public void UpdateTime(int _times) {
-		times_txt.text = _times.ToString();
+		times_txt.text = "Request: "+ _times.ToString() + " rectify";
     }
 
 }
