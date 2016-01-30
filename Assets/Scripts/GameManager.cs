@@ -1,15 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public partial class GameManager : Singleton<GameManager> {
+	private float passRequestTime = 3;
 
-	// Use this for initialization
-	void Start () {
-	
+	protected override void Awake()
+	{
+		base.Awake();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	private void Start() { }
+
+	private void Update() {
+		GameTimeHandle();
+	}
+
+	public void GetDecide(bool _isPass) {
+		//TODO:	pass/fail handle
+
+		if (_isPass)
+		{
+			passRequestTime--;
+
+			if (passRequestTime == 0)
+				Pass();
+		}
+		else {
+
+		}
+	}
+
+	private void Pass() {
+
+	}
+
+	private void GameOver() {
+
+	}
+
+	private void InitStage(int _index) {
+
+	}
+
+	private void UpdateStage(int _index) {
 	}
 }
