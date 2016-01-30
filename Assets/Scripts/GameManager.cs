@@ -27,12 +27,15 @@ public partial class GameManager : Singleton<GameManager> {
 	}
 
 	public void GetDecide(bool _isPass) {
+		if (gamestatus != GameStatus.PROCESS)
+			return;
+
 		//TODO:	pass/fail handle
 		if (_isPass)
 		{
 			passRequestTime--;
-
-			if (passRequestTime == 0)
+			gameTimeBar.UpdateTime(passRequestTime);
+            if (passRequestTime == 0)
 				Pass();
 		}
 		else {
