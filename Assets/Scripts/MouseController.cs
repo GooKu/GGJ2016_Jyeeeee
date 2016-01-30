@@ -20,13 +20,10 @@ public class MouseController : MonoBehaviour {
 
 		if (_hit.collider) {
 
-			switch (_hit.collider.tag) {
-			case "behavior_ok":
-				break;
-			case "behavior_noise":
-				//TODO:	minus player's life
-				break;
+			if (_hit.collider.gameObject.GetComponent<Mob> ()) {
+				handleMobReaction (_hit.collider.gameObject.GetComponent<Mob> ());
 			}
+
 		}
 
 	}
@@ -36,4 +33,9 @@ public class MouseController : MonoBehaviour {
 
 	void onMouseDrag(PointData _pointData) {
 	}
+
+	void handleMobReaction(Mob mob) {
+		mob.OnMouseHit ();
+	}
+
 }
