@@ -2,18 +2,11 @@
 using System.Collections;
 
 public partial class GameManager : Singleton<GameManager> {
-	TimeBarView gameTimeBar;
 	private float passRequestTime = 3;
-	private float gameTimechange;
-	
-
-
-	int timer_i;
 
 	protected override void Awake()
 	{
 		base.Awake();
-
 	}
 
 	private void Start() { }
