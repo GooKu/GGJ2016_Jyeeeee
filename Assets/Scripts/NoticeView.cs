@@ -31,7 +31,7 @@ public class NoticeView : MonoBehaviour {
 
 		float ft = 0.0f;
 		float fV = 0.0f;
-		float _time = 0.25f;
+		float _time = 0.15f;
 
 		Color orgImgColor = img.color;
 //		Color orgTextColor = text.color;

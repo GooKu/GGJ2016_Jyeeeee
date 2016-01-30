@@ -14,18 +14,20 @@ public partial class GameManager : Singleton<GameManager> {
 	public GameObject[] StageArray;
 	//gooku, setting at the object/-e
 
-	private int passRequestTime = 3;
+	private int passRequestCount = 3;
 	private float punishTime = 1;
 
 	private float remainTimeRate { get { return remainTime / passTime; } }
 
 	private GameStatus gamestatus = GameStatus.NON;
+	private StageTableHandler stageTableHandler = new StageTableHandler();
 
 
 	protected override void Awake()
 	{
 		base.Awake();
-	}
+		stageTableHandler.InitData();
+    }
 
 	private void Start() {
 #if DEBUG
@@ -59,9 +61,9 @@ public partial class GameManager : Singleton<GameManager> {
 
 		if (_isPass)
 		{
-			passRequestTime--;
-			gameTimeBar.UpdateTime(passRequestTime);
-            if (passRequestTime == 0)
+			passRequestCount--;
+			gameTimeBar.UpdateTime(passRequestCount);
+            if (passRequestCount == 0)
 				Pass();
 		}
 		else {
@@ -92,10 +94,15 @@ public partial class GameManager : Singleton<GameManager> {
 	}
 
 	private void InitStage(int _index) {
+
+		StageData stageData = stageTableHandler.GetStageData(_index);
+
+		passTime = stageData.gameTime;
+		passRequestCount = stageData.passRequestCount;
+
 		remainTime = passTime;
-		passRequestTime = 3;
 		gameTimeBar.UpdateBar(remainTimeRate);
-		gameTimeBar.UpdateTime(passRequestTime);
+		gameTimeBar.UpdateTime(passRequestCount);
 
 		for (int i=0; i < StageArray.Length;i++)
 		{

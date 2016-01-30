@@ -144,7 +144,6 @@ public class bg_scroll : MonoBehaviour
 		foreach (Mob mob in MobList)
 		{
 			mob.init();
-			print(Random.Range(0f, 1f));
 			mob.gameObject.SetActive(Random.Range(0f, 1f) > 0.5f);
 //			mob.gameObject.SetActive(true);
 		}

@@ -127,7 +127,8 @@ MonoBehaviour:
   noticeView: {fileID: 2086577066}
   resultView: {fileID: 2086577067}
   StartMenu: {fileID: 495442630}
-  StageArray: []
+  StageArray:
+  - {fileID: 386898951}
   gameTimeBar: {fileID: 454171579}
 --- !u!1 &367897241
 GameObject:
@@ -1947,7 +1948,7 @@ RectTransform:
   m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 384, y: -128}
+  m_AnchoredPosition: {x: 515, y: -170}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2125207223
