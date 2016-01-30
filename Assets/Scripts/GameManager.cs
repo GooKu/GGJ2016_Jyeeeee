@@ -5,6 +5,8 @@ public partial class GameManager : Singleton<GameManager> {
 	//gooku, setting at the object/-s
 	public GameObject PassObj;
 	public GameObject FailObj;
+	public NoticeView noticeView;
+	public GameObject StartMenu;
 	//gooku, setting at the object/-e
 
 	private int passRequestTime = 3;
@@ -21,21 +23,30 @@ public partial class GameManager : Singleton<GameManager> {
 	}
 
 	private void Start() {
-		InitStage(0);
-		gamestatus = GameStatus.PROCESS;//gooku: tmp for test. will update to button control
-    }
+		m_bg_scrolling = false;
+		gamestatus = GameStatus.NON;
+	}
 
 	private void Update() {
-
 		if(gamestatus == GameStatus.PROCESS)
 			GameTimeHandle();
 	}
 
+	public void GameStart(){
+		StartMenu.SetActive(false);
+		InitStage(0);
+		m_bg_scrolling = true;
+		gamestatus = GameStatus.PROCESS;
+	}
+
 	public void GetDecide(bool _isPass) {
+
 		if (gamestatus != GameStatus.PROCESS)
 			return;
 
-		//TODO:	pass/fail handle
+		if(noticeView != null)
+			noticeView.IssueNotice(_isPass);
+
 		if (_isPass)
 		{
 			passRequestTime--;
