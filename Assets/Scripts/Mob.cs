@@ -3,21 +3,26 @@ using System.Collections;
 
 public class Mob : MonoBehaviour {
 	
-	public Behavior m_behavior;
+	public Behavior m_defaultBehavior;
 
-	Animator m_anim;
+	private Behavior m_currentBehavior;
 
-	// Use this for initialization
-	void Start () {
+	private Animator m_anim;
+
+	private void Awake()
+	{
+		m_anim = GetComponent<Animator>();
 		init();
-
-		m_anim = GetComponent<Animator> ();
 	}
 
-	void init () {
+	void Start () {
+	}
+
+	public void init () {
+		SetBehavior(m_defaultBehavior);
+		m_anim.SetBool("alive", true);
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	}
 
@@ -39,10 +44,10 @@ public class Mob : MonoBehaviour {
 	}
 
 	public Behavior GetBehavior () {
-		return m_behavior;
+		return m_currentBehavior;
 	}
 	public void SetBehavior (Behavior b) {
-		m_behavior = b;
+		m_currentBehavior = b;
 	}
 
 	private void MakeMobAsRegularMob() {

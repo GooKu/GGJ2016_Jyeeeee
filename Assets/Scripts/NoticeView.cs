@@ -27,14 +27,14 @@ public class NoticeView : MonoBehaviour {
 		_obj.transform.localScale = Vector2.zero;
 
 		Image img = _obj.GetComponent<Image>();
-		Text text = _obj.transform.Find("Text").GetComponent<Text>();
+//		Text text = _obj.transform.Find("Text").GetComponent<Text>();
 
 		float ft = 0.0f;
 		float fV = 0.0f;
 		float _time = 0.25f;
 
 		Color orgImgColor = img.color;
-		Color orgTextColor = text.color;
+//		Color orgTextColor = text.color;
 
 		do
 		{
@@ -44,12 +44,12 @@ public class NoticeView : MonoBehaviour {
 			Color color = Color.Lerp(Color.clear, orgImgColor, ft);
 
 			img.color = color;
-			text.color = color;
+//			text.color = color;
             yield return null;
 		} while (ft < 0.95f);
 
 		img.color = orgImgColor;
-		text.color = orgTextColor;
+//		text.color = orgTextColor;
 		yield return new WaitForSeconds(0.3f);
         _obj.SetActive(false);
 	}

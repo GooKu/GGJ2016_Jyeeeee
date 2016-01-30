@@ -8,7 +8,9 @@ public class bg_scroll : MonoBehaviour
 	public delegate void callbackEventWithGameObject (GameObject go);
 	[HideInInspector]
 	public callbackEventWithGameObject OnScrollEnd = null;
-	
+
+	private List<Mob> MobList = new List<Mob>();
+
 	private const float scroll_unit = 16.0f;
 
 	public static float m_start_x = 0.0f;
@@ -50,13 +52,25 @@ public class bg_scroll : MonoBehaviour
 		m_scroll_speed_x = -0.2f;
 		m_start_x = scroll_unit;
 		m_end_x = -(scroll_unit * 2);
+
+		foreach (Transform child in transform)
+		{
+			if (child.GetComponent<Mob>()) {
+				MobList.Add(child.GetComponent<Mob>());
+            }
+		}
+
+		InitMobArray();
+		InitEvents();
+
 	}
 
 	public void InitEvents ()
 	{
 		OnScrollEnd = (GameObject go) => {
 			Debug.Log ("Default callback : OnScrollEnd()");
-		};
+			InitMobArray();
+        };
 	}
 
 	public void CreateMobInst (Vector3 mob_pos)
@@ -124,6 +138,18 @@ public class bg_scroll : MonoBehaviour
 		go.transform.parent = this.transform;
 		return go;
 	}
+
+	private void InitMobArray()
+	{
+		foreach (Mob mob in MobList)
+		{
+			mob.init();
+			print(Random.Range(0f, 1f));
+			mob.gameObject.SetActive(Random.Range(0f, 1f) > 0.5f);
+//			mob.gameObject.SetActive(true);
+		}
+	}
+
 	
 	#if UNITY_EDITOR
 
