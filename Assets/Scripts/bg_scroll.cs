@@ -29,8 +29,10 @@ public class bg_scroll : MonoBehaviour
 
 	public GameObject m_goBackgroundSprite;
 	public Component m_comBackgroundSprite;
+	//public Sprite m_spBackgroundSprite;
 
 	public List<GameObject> m_goList_MobInst = new List<GameObject>();
+	public System.Random rnd;
 
 	public void Start ()
 	{
@@ -38,6 +40,12 @@ public class bg_scroll : MonoBehaviour
 
 		m_pos_x = transform.position.x;
 		m_pos_y = transform.position.y;
+
+		m_goBackgroundSprite = gameObject;
+		m_comBackgroundSprite = m_goBackgroundSprite.GetComponent<SpriteRenderer>();
+		//m_spBackgroundSprite = m_goBackgroundSprite.GetComponent<SpriteRenderer>().sprite;
+
+		rnd = new System.Random(System.DateTime.Now.Millisecond);
 	}
 
 	public void Init ()
@@ -51,7 +59,7 @@ public class bg_scroll : MonoBehaviour
 		m_scroll_x = true;
 		m_scroll_speed_x = -0.2f;
 		m_start_x = scroll_unit;
-		m_end_x = -(scroll_unit * 2);
+		m_end_x = -(scroll_unit * 2) + 8; // 16
 
 		foreach (Transform child in transform)
 		{
@@ -69,6 +77,7 @@ public class bg_scroll : MonoBehaviour
 	{
 		OnScrollEnd = (GameObject go) => {
 			Debug.Log ("Default callback : OnScrollEnd()");
+			//ChangeBackground(rnd.Next(1, 4));//debug
 			InitMobArray();
         };
 	}
@@ -81,7 +90,7 @@ public class bg_scroll : MonoBehaviour
 			mob_inst.transform.parent = this.transform;
 			mob_inst.transform.position = mob_pos;
 			m_goList_MobInst.Add(mob_inst);
-			Debug.LogWarning ("CreateMobInst> Add A New Mob Inst!");
+			Debug.Log ("CreateMobInst> Add A New Mob Inst!");
 		} else {
 			Debug.LogWarning ("CreateMobInst> Cannot Create Mob!");
 		}
@@ -97,6 +106,31 @@ public class bg_scroll : MonoBehaviour
 			Destroy(mob);
 		}
 		m_goList_MobInst.Clear();
+	}
+	
+	public void ChangeBackground (int bg_index)
+	{
+		SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+		if (sr == null) {
+			Debug.LogWarning ("Cannot Find SpriteRenderer!");
+		}
+
+		Debug.Log ("Change Background to [" + bg_index.ToString() + "]");
+		switch (bg_index)
+		{
+		case 1:
+			sr.sprite = Resources.Load<Sprite>("bg-01");
+			break;
+		case 2:
+			sr.sprite = Resources.Load<Sprite>("bg-02");
+			break;
+		case 3:
+			sr.sprite = Resources.Load<Sprite>("bg-03");
+			break;
+		default:
+			sr.sprite = Resources.Load<Sprite>("test");
+			break;
+		}
 	}
 
 	public void FixedUpdate ()
@@ -150,7 +184,7 @@ public class bg_scroll : MonoBehaviour
 	}
 
 	
-	#if UNITY_EDITOR
+#if UNITY_EDITOR
 
 	public int m_DebugUI_StartX = 0;
 	public int m_DebugUI_StartY = 0;
@@ -175,10 +209,7 @@ public class bg_scroll : MonoBehaviour
 #if SM_DEBUG_ADD_MOB
 
 		if (GUI.Button (new Rect (xx, yy, ww, hh), "Add Mob")) {
-			System.Random rnd = new System.Random(System.DateTime.Now.Millisecond);
-
 			GameObject mob_inst = Instantiate(Resources.Load("Prefab/Mobs/Mob", typeof(GameObject))) as GameObject;
-
 			if (mob_inst != null) {
 				mob_inst.transform.parent = this.transform;
 				mob_inst.transform.localPosition = new Vector3((int)((rnd.NextDouble() * 16.0f) - 8.0f), 0, 0);
@@ -187,7 +218,6 @@ public class bg_scroll : MonoBehaviour
 			} else {
 				Debug.LogWarning ("Cannot Create Mob!");
 			}
-
 		}
 		yy += hh;
 
