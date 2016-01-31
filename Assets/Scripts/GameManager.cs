@@ -13,9 +13,11 @@ public partial class GameManager : Singleton<GameManager> {
 	public ResultView resultView;
 	public GameObject StartMenu;
 	public GameObject[] StageArray;
+	public AudioSource LoopMusic;
+	public AudioSource BtnAudio;
 	//gooku, setting at the object/-e
 
-		public bool IsPlayable { get { return gamestatus == GameStatus.PROCESS; } }
+	public bool IsPlayable { get { return gamestatus == GameStatus.PROCESS; } }
 
 	private int currentStageIndex = 0;
 	private int passRequestCount = 3;
@@ -54,7 +56,9 @@ public partial class GameManager : Singleton<GameManager> {
 		InitStage(currentStageIndex);
 		m_bg_scrolling = true;
 		gamestatus = GameStatus.PROCESS;
-	}
+		LoopMusic.clip = Resources.Load<AudioClip>("sound/bg_music_loop");
+		LoopMusic.Play();
+    }
 
 	public void GetDecide(bool _isPass) {
 
@@ -66,12 +70,17 @@ public partial class GameManager : Singleton<GameManager> {
 
 		if (_isPass)
 		{
+			BtnAudio.clip = Resources.Load<AudioClip>("sound/correct_sound");
+			BtnAudio.Play();
 			passRequestCount--;
 			gameTimeBar.UpdateTime(passRequestCount);
             if (passRequestCount == 0)
 				Pass();
 		}
 		else {
+			BtnAudio.clip = Resources.Load<AudioClip>("sound/sound_wrong");
+			BtnAudio.Play();
+
 			remainTime -= punishTime;
 
 			if (remainTime <= 0) {
@@ -124,6 +133,10 @@ public partial class GameManager : Singleton<GameManager> {
 
 		if (currentStageIndex >= StageArray.Length)
 			currentStageIndex = 0;
+
+		BtnAudio.clip = Resources.Load<AudioClip>("sound/change_stage");
+		BtnAudio.Play();
+
 
 		InitStage(currentStageIndex);
 		gamestatus = GameStatus.PROCESS;
