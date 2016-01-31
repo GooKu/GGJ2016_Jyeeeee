@@ -70,6 +70,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pos_x: 0
   m_pos_y: 0
+  m_goBackgroundSprite: {fileID: 0}
+  m_comBackgroundSprite: {fileID: 0}
+  m_goList_MobInst: []
+  m_goList_HandleInst: []
+  m_goList_MapInst: []
+  m_DebugUI_StartX: 0
+  m_DebugUI_StartY: 0
+  m_Debug_Scroll_Speed: -.0500000007
 --- !u!212 &21212732
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -92,7 +100,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1023611371
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d55d930e2eb9c4621a5d5056f8a6af3e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -115,6 +123,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -1023611371
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

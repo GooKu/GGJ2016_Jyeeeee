@@ -4,6 +4,9 @@ using System.Collections.Generic; // for List.
 
 public class bg_scroll : MonoBehaviour
 {
+
+	#region _data_field_
+
 	[HideInInspector]
 	public delegate void callbackEventWithGameObject (GameObject go);
 	[HideInInspector]
@@ -33,7 +36,10 @@ public class bg_scroll : MonoBehaviour
 
 	public List<GameObject> m_goList_MobInst = new List<GameObject>();
 	public List<GameObject> m_goList_HandleInst = new List<GameObject>();
+	public List<GameObject> m_goList_MapInst = new List<GameObject>();
 	public System.Random rnd;
+
+	#endregion
 
 	public void Start ()
 	{
@@ -56,6 +62,7 @@ public class bg_scroll : MonoBehaviour
 		} else {
 			ClearAllMobInst();
 			ClearAllHandleInst();
+			ClearAllMapInst();
 		}
 
 		m_scroll_x = true;
@@ -85,6 +92,8 @@ public class bg_scroll : MonoBehaviour
 			InitMobArray();
         };
 	}
+
+	#region _prefab_inst_
 
 	public void CreateMobInst (Vector3 mob_pos)
 	{
@@ -137,7 +146,35 @@ public class bg_scroll : MonoBehaviour
 		}
 		m_goList_HandleInst.Clear();
 	}
+
+	public void CreateMapInst (Vector3 map_pos)
+	{
+		GameObject inst = Instantiate(Resources.Load("Prefab/Map1", typeof(GameObject))) as GameObject;
+		
+		if (inst != null) {
+			inst.transform.parent = this.transform;
+			inst.transform.localPosition = map_pos;
+			m_goList_MapInst.Add(inst);
+			Debug.Log ("CreateMapInst> Add A New Map Inst!");
+		} else {
+			Debug.LogWarning ("CreateMapInst> Cannot Create Map!");
+		}
+	}
 	
+	public void ClearAllMapInst ()
+	{
+		if (m_goList_MapInst == null) {
+			return;
+		}
+		
+		foreach (var item in m_goList_MapInst) {
+			Destroy(item);
+		}
+		m_goList_MapInst.Clear();
+	}
+
+	#endregion
+
 	public void ChangeBackground (int bg_index)
 	{
 		SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
@@ -158,6 +195,7 @@ public class bg_scroll : MonoBehaviour
 			break;
 		case 3:
 			sr.sprite = Resources.Load<Sprite>("bg-03");
+			CreateMapInst(new Vector3(1.3f, 0, 0));
 			CreateHandleInst(new Vector3(1.5f, 0.3333f, 0));
 			CreateHandleInst(new Vector3(-1.5f, 0.3333f, 0));
 			break;
@@ -184,6 +222,7 @@ public class bg_scroll : MonoBehaviour
 
 				ClearAllMobInst();
 				ClearAllHandleInst();
+				ClearAllMapInst();
 
 				if (OnScrollEnd != null) {
 					OnScrollEnd( gameObject );
