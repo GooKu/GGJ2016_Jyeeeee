@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: bg
+    uniqueID: 3271355925
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: chara
+    uniqueID: 4121870761
+    locked: 0
+  - name: effect
+    uniqueID: 488858883
+    locked: 0
+  - name: fg
+    uniqueID: 3884683585
     locked: 0
