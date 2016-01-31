@@ -73,10 +73,10 @@ public partial class GameManager : Singleton<GameManager> {
 			remainTime -= punishTime;
 
 			if (remainTime <= 0) {
-				gameTimeBar.UpdateBar(0);
+				gameTimeBar.UpdateBar(0, 0);
 				GameOver();
 			} else {
-				gameTimeBar.UpdateBar(remainTimeRate);
+				gameTimeBar.UpdateBar(remainTimeRate, remainTime);
 			}
 		}
 	}
@@ -104,7 +104,7 @@ public partial class GameManager : Singleton<GameManager> {
 		passRequestCount = stageData.passRequestCount;
 
 		remainTime = passTime;
-		gameTimeBar.UpdateBar(remainTimeRate);
+		gameTimeBar.UpdateBar(remainTimeRate, remainTime);
 		gameTimeBar.UpdateTime(passRequestCount);
 
 		for (int i=0; i < StageArray.Length;i++)

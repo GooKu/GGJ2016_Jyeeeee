@@ -10,7 +10,7 @@ public partial class GameManager : Singleton<GameManager> {
 
 	private void GameTimeHandle (){
 		remainTime -= Time.deltaTime;
-		gameTimeBar.UpdateBar (remainTime/passTime);
+		gameTimeBar.UpdateBar (remainTime/passTime, remainTime);
 		if (remainTime <= 0) {
 			GameOver ();
 		}
