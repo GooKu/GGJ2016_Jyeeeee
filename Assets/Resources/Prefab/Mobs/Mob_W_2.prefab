@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11466226}
   - 95: {fileID: 9543656}
   m_Layer: 0
-  m_Name: Mob_W_3
+  m_Name: Mob_W_2
   m_TagString: behavior_noise
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
