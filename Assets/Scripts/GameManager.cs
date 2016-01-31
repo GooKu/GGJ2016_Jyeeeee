@@ -15,6 +15,8 @@ public partial class GameManager : Singleton<GameManager> {
 	public GameObject[] StageArray;
 	//gooku, setting at the object/-e
 
+		public bool IsPlayable { get { return gamestatus == GameStatus.PROCESS; } }
+
 	private int currentStageIndex = 0;
 	private int passRequestCount = 3;
 	private float punishTime = 1;

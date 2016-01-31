@@ -18,7 +18,9 @@ public class MouseController : MonoBehaviour {
 	}
 
 	void onMouseDown(RaycastHit2D _hit) {
-		print("onMouseDown");
+		if (!GameManager.Instance.IsPlayable)
+			return;
+
 		if (_hit.collider) {
 
 			if (_hit.collider.gameObject.GetComponent<Mob> ()) {
