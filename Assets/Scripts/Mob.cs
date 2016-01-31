@@ -29,17 +29,20 @@ public class Mob : MonoBehaviour {
 	public void OnMouseHit () {
 		
 		switch (GetBehavior()) {
+
 		case Behavior.none:
 			break;
+
 		case Behavior.collect_behavior:
 				MakeMobAsRegularMob();
 				GameManager.Instance.GetDecide(false);
-            break;
-		case Behavior.wrong_behavior_noise:
-			//TODO:	minus player's life
+			break;
+
+		case Behavior.wrong_behavior:
 				MakeMobAsRegularMob();
 				GameManager.Instance.GetDecide(true);
 			break;
+
 		}
 
 	}
@@ -62,5 +65,5 @@ public enum Behavior
 {
 	none,
 	collect_behavior,
-	wrong_behavior_noise
+	wrong_behavior
 }
