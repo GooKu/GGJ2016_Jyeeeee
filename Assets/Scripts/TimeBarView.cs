@@ -23,7 +23,7 @@ public class TimeBarView : MonoBehaviour {
 		timeBar_img.fillAmount = _present;
 		timeBar_img.color = Color.Lerp(Color.red, Color.green, _present-0.2f);
 
-		remainTime_txt.text = string.Format("{0:0.##}", _remainTime);
+		remainTime_txt.text = string.Format("{0:0.00}", _remainTime);
     }
 
 	public void UpdateTime(int _times) {
