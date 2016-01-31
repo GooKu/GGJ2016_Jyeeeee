@@ -2,6 +2,7 @@
 #if !UNITY_EDITOR
 #undef DEBUG
 #endif
+#undef DEBUG
 
 using UnityEngine;
 using System.Collections;

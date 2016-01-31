@@ -32,12 +32,13 @@ public class Mob : MonoBehaviour {
 		case Behavior.none:
 			break;
 		case Behavior.collect_behavior:
-			GameManager.Instance.GetDecide(false);
-			break;
+				MakeMobAsRegularMob();
+				GameManager.Instance.GetDecide(false);
+            break;
 		case Behavior.wrong_behavior_noise:
 			//TODO:	minus player's life
-			MakeMobAsRegularMob();
-			GameManager.Instance.GetDecide(true);
+				MakeMobAsRegularMob();
+				GameManager.Instance.GetDecide(true);
 			break;
 		}
 
