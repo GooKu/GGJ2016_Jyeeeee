@@ -19,6 +19,7 @@ public class Mob : MonoBehaviour {
 	}
 
 	public void init () {
+		print(gameObject.activeSelf);
 		SetBehavior(m_defaultBehavior);
 		m_anim.SetBool("alive", true);
 	}
