@@ -32,6 +32,7 @@ public class bg_scroll : MonoBehaviour
 	//public Sprite m_spBackgroundSprite;
 
 	public List<GameObject> m_goList_MobInst = new List<GameObject>();
+	public List<GameObject> m_goList_HandleInst = new List<GameObject>();
 	public System.Random rnd;
 
 	public void Start ()
@@ -53,7 +54,8 @@ public class bg_scroll : MonoBehaviour
 		if (m_goList_MobInst == null) {
 			m_goList_MobInst = new List<GameObject>();
 		} else {
-			CleaeAllMobInst();
+			ClearAllMobInst();
+			ClearAllHandleInst();
 		}
 
 		m_scroll_x = true;
@@ -77,35 +79,63 @@ public class bg_scroll : MonoBehaviour
 	{
 		OnScrollEnd = (GameObject go) => {
 			Debug.Log ("Default callback : OnScrollEnd()");
-			//ChangeBackground(rnd.Next(1, 4));//debug
+#if SM_DEBUG_SCROLL_BG
+			ChangeBackground(rnd.Next(1, 4));//debug
+#endif
 			InitMobArray();
         };
 	}
 
 	public void CreateMobInst (Vector3 mob_pos)
 	{
-		GameObject mob_inst = Instantiate(Resources.Load("Prefab/Mobs/Mob", typeof(GameObject))) as GameObject;
+		GameObject inst = Instantiate(Resources.Load("Prefab/Mobs/Mob", typeof(GameObject))) as GameObject;
 		
-		if (mob_inst != null) {
-			mob_inst.transform.parent = this.transform;
-			mob_inst.transform.position = mob_pos;
-			m_goList_MobInst.Add(mob_inst);
+		if (inst != null) {
+			inst.transform.parent = this.transform;
+			inst.transform.localPosition = mob_pos;
+			m_goList_MobInst.Add(inst);
 			Debug.Log ("CreateMobInst> Add A New Mob Inst!");
 		} else {
 			Debug.LogWarning ("CreateMobInst> Cannot Create Mob!");
 		}
 	}
-	
-	public void CleaeAllMobInst ()
+
+	public void ClearAllMobInst ()
 	{
 		if (m_goList_MobInst == null) {
 			return;
 		}
 
-		foreach (var mob in m_goList_MobInst) {
-			Destroy(mob);
+		foreach (var item in m_goList_MobInst) {
+			Destroy(item);
 		}
 		m_goList_MobInst.Clear();
+	}
+	
+	public void CreateHandleInst (Vector3 handle_pos)
+	{
+		GameObject inst = Instantiate(Resources.Load("Prefab/Handle1", typeof(GameObject))) as GameObject;
+		
+		if (inst != null) {
+			inst.transform.parent = this.transform;
+			inst.transform.localPosition = handle_pos;
+			m_goList_HandleInst.Add(inst);
+			Debug.Log ("CreateHandleInst> Add A New Handle Inst!");
+		} else {
+			Debug.LogWarning ("CreateHandleInst> Cannot Create Handle!");
+		}
+	}
+	
+	public void ClearAllHandleInst ()
+	{
+		if (m_goList_HandleInst == null) {
+			return;
+		}
+		
+		foreach (var item in m_goList_HandleInst) {
+			Destroy(item);
+		}
+		m_goList_HandleInst.Clear();
 	}
 	
 	public void ChangeBackground (int bg_index)
@@ -120,12 +150,16 @@ public class bg_scroll : MonoBehaviour
 		{
 		case 1:
 			sr.sprite = Resources.Load<Sprite>("bg-01");
+			CreateHandleInst(new Vector3(2.0f, 0.3333f, 0));
+			CreateHandleInst(new Vector3(-2.0f, 0.3333f, 0));
 			break;
 		case 2:
 			sr.sprite = Resources.Load<Sprite>("bg-02");
 			break;
 		case 3:
 			sr.sprite = Resources.Load<Sprite>("bg-03");
+			CreateHandleInst(new Vector3(1.5f, 0.3333f, 0));
+			CreateHandleInst(new Vector3(-1.5f, 0.3333f, 0));
 			break;
 		default:
 			sr.sprite = Resources.Load<Sprite>("test");
@@ -148,7 +182,8 @@ public class bg_scroll : MonoBehaviour
 				//Debug.Log ("m_pos_x = " + m_pos_x);
 				m_pos_x += (scroll_unit * 3);
 
-				CleaeAllMobInst();
+				ClearAllMobInst();
+				ClearAllHandleInst();
 
 				if (OnScrollEnd != null) {
 					OnScrollEnd( gameObject );
