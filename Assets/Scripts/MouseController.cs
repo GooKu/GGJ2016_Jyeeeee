@@ -5,6 +5,7 @@ public class MouseController : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+
 		MouseManager.Instance.MouseDownEven_0 += onMouseDown;
 		MouseManager.Instance.MouseUpEven_0 += onMouseUp;
 		MouseManager.Instance.MouseDragEven_0 += onMouseDrag;
@@ -17,6 +18,8 @@ public class MouseController : MonoBehaviour {
 	}
 
 	void onMouseDown(RaycastHit2D _hit) {
+		if (!GameManager.Instance.IsPlayable)
+			return;
 
 		if (_hit.collider) {
 

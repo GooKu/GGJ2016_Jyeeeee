@@ -1,6 +1,6 @@
 ﻿#define DEBUG
 #if !UNITY_EDITOR
-#undef DEBUG
+//#undef DEBUG
 #endif
 /**
  *Brief: Mouse event control.
