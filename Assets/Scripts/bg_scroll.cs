@@ -79,7 +79,7 @@ public class bg_scroll : MonoBehaviour
 
 		InitMobArray();
 		InitEvents();
-
+		ChangeBackground(int.Parse(gameObject.name));
 	}
 
 	public void InitEvents ()
@@ -90,7 +90,8 @@ public class bg_scroll : MonoBehaviour
 			ChangeBackground(rnd.Next(1, 4));//debug
 #endif
 			InitMobArray();
-        };
+			ChangeBackground(int.Parse(gameObject.name));
+		};
 	}
 
 	#region _prefab_inst_
@@ -177,6 +178,8 @@ public class bg_scroll : MonoBehaviour
 
 	public void ChangeBackground (int bg_index)
 	{
+		print(bg_index);
+
 		SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
 		if (sr == null) {
 			Debug.LogWarning ("Cannot Find SpriteRenderer!");
