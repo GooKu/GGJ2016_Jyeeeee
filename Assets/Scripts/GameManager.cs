@@ -128,8 +128,10 @@ public partial class GameManager : Singleton<GameManager> {
 	{
 		currentStageIndex++;
 
-		if(m_bg_scroll_speed > -2)
-			m_bg_scroll_speed -= 0.05f;
+		m_bg_scroll_speed -= 0.05f; // speed up.
+		if (m_bg_scroll_speed < -2.0f) {
+			m_bg_scroll_speed = -2.0f;
+		}
 
 		if (currentStageIndex >= StageArray.Length)
 			currentStageIndex = 0;
@@ -144,9 +146,12 @@ public partial class GameManager : Singleton<GameManager> {
 		resultView.Init();
 	}
 
-	public void Restart() {
-		if (m_bg_scroll_speed < -0.05f)
-			m_bg_scroll_speed += 0.05f;
+	public void Restart() 
+	{
+		m_bg_scroll_speed += 0.05f; // speed down.
+		if (m_bg_scroll_speed > -0.05f) {
+			m_bg_scroll_speed = -0.05f;
+		}
 
 		InitStage(currentStageIndex);
 		gamestatus = GameStatus.PROCESS;
