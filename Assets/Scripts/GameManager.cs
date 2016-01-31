@@ -119,8 +119,8 @@ public partial class GameManager : Singleton<GameManager> {
 	{
 		currentStageIndex++;
 
-		if(m_bg_scroll_speed < 2)
-			m_bg_scroll_speed += 0.05f;
+		if(m_bg_scroll_speed > -2)
+			m_bg_scroll_speed -= 0.05f;
 
 		if (currentStageIndex >= StageArray.Length)
 			currentStageIndex = 0;
@@ -132,9 +132,8 @@ public partial class GameManager : Singleton<GameManager> {
 	}
 
 	public void Restart() {
-		if (m_bg_scroll_speed < 2)
+		if (m_bg_scroll_speed < -0.05f)
 			m_bg_scroll_speed += 0.05f;
-
 
 		InitStage(currentStageIndex);
 		gamestatus = GameStatus.PROCESS;
